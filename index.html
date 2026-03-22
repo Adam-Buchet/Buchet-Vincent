@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buchet Vincent - Architecture</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+
+    <section id="accueil" class="hero-section">
+        <div class="hero-slider" id="hero-slider">
+            <div class="hero-slide active" data-img="41.jpg" data-num="41"></div>
+            <div class="hero-slide" data-img="64.jpg" data-num="64"></div>
+            <div class="hero-slide" data-img="65.jpg" data-num="65"></div>
+            <div class="hero-slide" data-img="66.jpg" data-num="66"></div>
+            <div class="hero-slide" data-img="67.jpg" data-num="67"></div>
+        </div>
+        
+        <button class="slider-btn prev" id="hero-prev" aria-label="Image précédente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="slider-btn next" id="hero-next" aria-label="Image suivante">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <header class="navbar" id="main-navbar">
+            <div class="logo-container"><a href="#accueil" class="logo"><img src="images/logo.png" alt="Logo TOPFACADE" class="logo-img"></a></div>
+            
+            <div class="nav-pill-container">
+                <nav class="nav-pill">
+                    <a href="#accueil" class="active nav-link">Accueil</a>
+                    <a href="#realisations" class="nav-link">Réalisations</a>
+                    <a href="#a-propos" class="nav-link">À propos de nous</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <span class="nav-sep">/</span>
+                    <a href="presse.html" class="nav-link">Presse</a>
+                </nav>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="theme-wrapper">
+                    <button class="icon-action-btn" id="theme-toggle" aria-label="Changer de thème">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 10 10c0 2-2 3-3 3-1 0-2-1-2-2a2 2 0 0 0-4 0c0 1-1 2-2 2H9a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h3z"></path>
+                            <circle cx="7.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                            <circle cx="10.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                            <circle cx="14.5" cy="8.5" r=".5" fill="currentColor"></circle>
+                            <circle cx="16.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                        </svg>
+                    </button>
+                    <div id="theme-dropdown" class="theme-dropdown">
+                        <button onclick="setTheme('light')">Thème Clair</button>
+                        <button onclick="setTheme('vintage')">Thème Vintage Green</button>
+                        <button onclick="setTheme('modernoffice')">Thème Modern Office</button>
+                        <button onclick="setTheme('newspaper')">Thème Journal</button>
+                    </div>
+                </div>
+
+                <button class="icon-action-btn" id="search-btn" aria-label="Rechercher">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mobile-menu" id="mobile-menu">
+                <button class="close-menu" id="close-menu">&times;</button>
+                <a href="#accueil" class="nav-link">Accueil</a>
+                <a href="#realisations" class="nav-link">Réalisations</a>
+                <a href="#a-propos" class="nav-link">À propos de nous</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="presse.html" class="nav-link">Presse</a>
+            </div>
+        </header>
+
+        <div class="hero-content">
+            <div class="text-content reveal">
+                <h1>Buchet Vincent</h1>
+                <p>L'avenir, c'est maintenant. TOPFACADE transforme<br>vos ambitions en réalités durables.</p>
+                <a href="#contact" class="cta-button">DISCUTONS &rarr;</a>
+            </div>
+
+            <div class="cards-content reveal">
+                <div class="card large-card" onclick="window.location.href='villa-contemporaine.html'" data-img="42.jpg" data-num="42">
+                    <div class="card-content-overlay">Dernière réalisation &rarr;</div>
+                </div>
+
+                <div class="card small-card" onclick="window.location.href='#contact'">
+                    <div class="small-card-img" data-img="43.jpg" data-num="43"></div>
+                    <div class="small-card-info">
+                        <strong>Prochain projet</strong>
+                        <span>Discutons de vos idées<br>Contactez-nous</span>
+                    </div>
+                    <button class="arrow-btn">&rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="realisations" class="page-container reveal">
+        <h1 class="page-title">Nos Réalisations</h1>
+        
+        <div class="featured-projects">
+            <div class="featured-project reveal">
+                <a href="complexe-horizon.html" class="featured-img" data-img="33.jpg" data-num="33"></a>
+                <div class="featured-text">
+                    <h2>Complexe Horizon</h2>
+                    <p>Un projet d'envergure alliant esthétisme contemporain et haute performance énergétique. La façade en aluminium brossé reflète la lumière naturelle tout au long de la journée.</p>
+                    <a href="complexe-horizon.html" class="cta-button">En savoir plus</a>
+                </div>
+            </div>
+
+            <div class="featured-project reveal">
+                <a href="residence-les-cedres.html" class="featured-img" data-img="34.jpg" data-num="34"></a>
+                <div class="featured-text">
+                    <h2>Résidence Les Cèdres</h2>
+                    <p>Rénovation complète d'un immeuble des années 70. Nous avons modernisé l'ensemble de l'enveloppe extérieure en utilisant un bardage en bois composite recyclé.</p>
+                    <a href="residence-les-cedres.html" class="cta-button">En savoir plus</a>
+                </div>
+            </div>
+
+            <div class="featured-project reveal">
+                <a href="villa-contemporaine.html" class="featured-img" data-img="35.jpg" data-num="35"></a>
+                <div class="featured-text">
+                    <h2>Villa Contemporaine</h2>
+                    <p>Maison individuelle d'exception avec façade ventilée, offrant un design épuré et une isolation thermique de pointe pour un confort durable.</p>
+                    <a href="villa-contemporaine.html" class="cta-button">En savoir plus</a>
+                </div>
+            </div>
+
+            <div class="featured-project reveal">
+                <a href="immeuble-haussmannien.html" class="featured-img" data-img="36.jpg" data-num="36"></a>
+                <div class="featured-text">
+                    <h2>Immeuble Haussmannien</h2>
+                    <p>Réhabilitation minutieuse d'un joyau du patrimoine parisien. Alliance parfaite entre préservation historique et efficacité énergétique moderne.</p>
+                    <a href="immeuble-haussmannien.html" class="cta-button">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="a-propos" class="page-container reveal">
+        <h1 class="page-title">Notre Histoire</h1>
+        
+        <div class="about-grid">
+            <div class="about-row">
+                <div class="about-text">
+                    <h2>Une vision durable</h2>
+                    <p>Fondée sur l'idée que l'architecture doit être en harmonie parfaite avec son environnement, <strong>TOPFACADE</strong> accompagne ses clients depuis plus de 10 ans. Nous concevons des espaces qui respectent la nature et s'intègrent naturellement dans le paysage.</p>
+                </div>
+                <div class="about-image" data-img="68.jpg" data-num="68"></div>
+            </div>
+            
+            <div class="about-row reverse">
+                <div class="about-text">
+                    <h2>L'humain au centre</h2>
+                    <p>Notre équipe d'architectes passionnés met un point d'honneur à utiliser des matériaux durables tout en garantissant une esthétique intemporelle. Nous croyons que chaque projet est unique et mérite une attention particulière du premier croquis jusqu'à la livraison finale.</p>
+                </div>
+                <div class="about-image" data-img="69.jpg" data-num="69"></div>
+            </div>
+            
+            <div class="about-row">
+                <div class="about-text">
+                    <h2>Innovation et tradition</h2>
+                    <p>Nous allions le savoir-faire artisanal aux technologies de pointe pour créer des bâtiments intelligents et performants. Notre approche garantit des constructions pérennes, alliant beauté classique et confort moderne.</p>
+                </div>
+                <div class="about-image" data-img="70.jpg" data-num="70"></div>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <h2 style="font-size: 1.8rem; margin-bottom: 20px; font-weight: 400; color: var(--brown-text); text-align: center;">Où nous trouver</h2>
+            <div class="map-wrapper">
+                <iframe src="https://maps.google.com/maps?q=109%20Rue%20L%C3%A9on%20Blum,%2042153%20Riorges&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="page-container reveal">
+        <h1 class="page-title">Discutons de votre projet</h1>
+        
+        <div class="contact-form-container">
+            <form class="contact-form" action="#" method="POST">
+                <input type="text" placeholder="Votre nom complet" required>
+                <input type="email" placeholder="Votre adresse e-mail" required>
+                <input type="text" placeholder="Sujet de votre message" required>
+                <textarea placeholder="Décrivez-nous votre projet ou posez vos questions ici..." required></textarea>
+                <button type="submit" class="submit-btn">Envoyer le message</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="search-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('search-modal')">&times;</button>
+            <h2>Rechercher une réalisation</h2>
+            <input type="text" id="search-input" placeholder="Ex: Villa, Bureaux...">
+            <ul id="search-results" class="search-results"></ul>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-text">© 2026 TOPFACADE. Tous droits réservés.</div>
+        <div class="footer-contact"><a href="mailto:contact@topfacade.fr">contact@topfacade.fr</a> &nbsp;|&nbsp; +33 1 23 45 67 89</div>
+        <div class="social-icons">
+            <a href="#" class="social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        </div>
+    </footer>
+
+    <script>
+        // Hero Slider Logic
+        const slides = document.querySelectorAll('.hero-slide');
+        const prevBtn = document.getElementById('hero-prev');
+        const nextBtn = document.getElementById('hero-next');
+        let currentSlide = 0;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function startSlideShow() {
+            slideInterval = setInterval(nextSlide, 6000);
+        }
+
+        function resetSlideShow() {
+            clearInterval(slideInterval);
+            startSlideShow();
+        }
+
+        if (slides.length > 0) {
+            nextBtn.addEventListener('click', () => { nextSlide(); resetSlideShow(); });
+            prevBtn.addEventListener('click', () => { prevSlide(); resetSlideShow(); });
+            startSlideShow();
+        }
+
+        // Init Apparition
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('active'); }}); }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Navbar & Défilement
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+        const navbar = document.getElementById("main-navbar");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) { navbar.classList.add("scrolled"); } 
+            else { navbar.classList.remove("scrolled"); }
+
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 300)) { current = section.getAttribute("id"); }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) { link.classList.add("active"); }
+            });
+        });
+
+        // Gestion du Thème
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeDropdown = document.getElementById('theme-dropdown');
+
+        themeToggleBtn.addEventListener('click', (e) => { e.stopPropagation(); themeDropdown.classList.toggle('active'); });
+        document.addEventListener('click', (e) => { if (!themeToggleBtn.contains(e.target) && !themeDropdown.contains(e.target)) { themeDropdown.classList.remove('active'); } });
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeDropdown.classList.remove('active');
+        }
+
+        // --- NOUVEAU : Gestion Menu Burger Mobile ---
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Replier le menu au clic sur un lien (sur mobile)
+        document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Modales
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        document.querySelectorAll('.modal-overlay').forEach(modal => { modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('active'); }); });
+
+        // Recherche dynamique
+        const projectsData = [ 
+            { title: "Complexe Horizon", url: "complexe-horizon.html" }, 
+            { title: "Résidence Les Cèdres", url: "residence-les-cedres.html" }, 
+            { title: "Villa Contemporaine", url: "villa-contemporaine.html" },
+            { title: "Immeuble Haussmannien", url: "immeuble-haussmannien.html" }
+        ];
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        document.getElementById('search-btn').addEventListener('click', () => { document.getElementById('search-modal').classList.add('active'); searchInput.focus(); displayResults(""); });
+        searchInput.addEventListener('input', (e) => displayResults(e.target.value));
+
+        function displayResults(query) {
+            searchResults.innerHTML = '';
+            const filtered = projectsData.filter(p => p.title.toLowerCase().includes(query.toLowerCase()));
+            if(filtered.length === 0) { searchResults.innerHTML = '<li><a href="#">Aucun résultat...</a></li>'; return; }
+            filtered.forEach(p => { 
+                const li = document.createElement('li'); 
+                li.innerHTML = `<a href="${p.url}">${p.title}</a>`; 
+                searchResults.appendChild(li); 
+            });
+        }
+    </script>
+
+    <!-- Script pour gestion dynamique des images placeholders -->
+    <script>
+        document.querySelectorAll('[data-img]').forEach(el => {
+            const imgSrc = el.getAttribute('data-img');
+            const imgNum = el.getAttribute('data-num');
+            
+            // On s'assure d'avoir la position relative pour centrer le texte
+            if(window.getComputedStyle(el).position === 'static') {
+                el.style.position = 'relative';
+            }
+            
+            const numDiv = document.createElement('div');
+            numDiv.className = 'img-num';
+            numDiv.textContent = imgNum;
+            el.appendChild(numDiv);
+
+            const img = new Image();
+            img.src = imgSrc;
+            img.onload = () => {
+                el.style.backgroundImage = `url('${img.src}')`;
+                numDiv.style.display = 'none'; // Cache le numéro si l'image existe
+            };
+            img.onerror = () => {
+                // L'image n'existe pas, on laisse le fond par défaut et le numéro visible
+            };
+        });
+    </script>
+</body>
+
+</html>

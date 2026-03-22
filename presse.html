@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOPFACADE - Presse</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .presse-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 0 20px;
+        }
+
+        .presse-header {
+            padding-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--brown-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        .back-btn:hover { opacity: 0.7; }
+
+        .carousel-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            perspective: 1200px;
+        }
+
+        .carousel-item {
+            position: absolute;
+            width: 100%;
+            height: 520px;
+            max-width: 380px;
+            background: var(--card-bg);
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            overflow: hidden;
+            filter: blur(8px);
+            transform: scale(0.8);
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            z-index: 10;
+            pointer-events: auto;
+            filter: blur(0);
+        }
+
+        .carousel-item.prev, .carousel-item.next {
+            opacity: 0.4;
+            z-index: 8;
+            pointer-events: auto;
+            filter: blur(3px);
+            transform: scale(0.85);
+        }
+
+        .carousel-item.prev { transform: translateX(-120%) scale(0.85); }
+        .carousel-item.next { transform: translateX(120%) scale(0.85); }
+
+        .carousel-item.hidden { opacity: 0; transform: scale(0.5); }
+
+        .carousel-img {
+            width: 100%;
+            height: 200px;
+            background-color: var(--brown-light);
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .carousel-content {
+            padding: 20px;
+            text-align: left;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--card-bg);
+        }
+
+        .carousel-content span {
+            font-size: 0.7rem;
+            color: var(--brown-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .carousel-content h2 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--brown-text);
+            line-height: 1.3;
+            font-weight: 500;
+        }
+
+        .carousel-content p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            color: var(--brown-text);
+            flex: 1;
+        }
+
+        .carousel-cta {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--brown-text);
+            color: var(--beige-bg);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 25px;
+            text-align: center;
+            transition: opacity 0.3s ease;
+            align-self: flex-start;
+        }
+        .carousel-cta:hover { opacity: 0.8; }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px 0 60px 0;
+            z-index: 30;
+        }
+
+        .carousel-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            color: var(--brown-text);
+            border: 2px solid rgba(0,0,0,0.12);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .carousel-btn:hover {
+            background: var(--brown-text);
+            color: var(--beige-bg);
+            border-color: var(--brown-text);
+            transform: scale(1.1);
+        }
+
+        .carousel-btn svg { width: 20px; height: 20px; }
+
+        .carousel-indicators {
+            display: none;
+            justify-content: center;
+            gap: 8px;
+            padding-bottom: 30px;
+        }
+
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: var(--brown-text);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 700px) {
+            .presse-header { padding-top: 70px; }
+            .carousel-wrapper { 
+                height: auto;
+                min-height: 480px;
+                max-width: 100%;
+                padding: 0 15px;
+            }
+            .carousel-item {
+                width: calc(100vw - 30px);
+                height: auto;
+                min-height: 450px;
+                max-width: 350px;
+            }
+            .carousel-item.prev, .carousel-item.next { opacity: 0; visibility: hidden; }
+            .carousel-item.active { transform: translateX(0) scale(1); }
+            .back-btn span { display: none; }
+            .back-btn svg { width: 26px; height: 26px; }
+            .carousel-nav { display: none; }
+            .carousel-indicators { display: flex; }
+            .carousel-content p { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar scrolled" id="main-navbar" style="background-color: var(--nav-bg-scrolled); box-shadow: 0 5px 20px rgba(0,0,0,0.05); padding: 10px 15px;">
+        <div class="logo-container"><a href="index.html#accueil" class="logo"><img src="images/logo.png" alt="Logo TOPFACADE" class="logo-img" style="height: 30px;"></a></div>
+        <div class="nav-pill-container">
+            <nav class="nav-pill">
+                <a href="index.html#accueil" class="nav-link">Accueil</a>
+                <a href="index.html#realisations" class="nav-link">Réalisations</a>
+                <a href="index.html#a-propos" class="nav-link">À propos de nous</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+                <span class="nav-sep">/</span>
+                <a href="presse.html" class="active nav-link">Presse</a>
+            </nav>
+        </div>
+        <div class="nav-actions">
+            <div class="theme-wrapper">
+                <button class="icon-action-btn" id="theme-toggle" aria-label="Changer de thème">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 10 10c0 2-2 3-3 3-1 0-2-1-2-2a2 2 0 0 0-4 0c0 1-1 2-2 2H9a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h3z"></path>
+                        <circle cx="7.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="10.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="14.5" cy="8.5" r=".5" fill="currentColor"></circle>
+                        <circle cx="16.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                    </svg>
+                </button>
+                <div id="theme-dropdown" class="theme-dropdown">
+                    <button onclick="setTheme('light')">Thème Clair</button>
+                    <button onclick="setTheme('vintage')">Thème Vintage Green</button>
+                    <button onclick="setTheme('modernoffice')">Thème Modern Office</button>
+                    <button onclick="setTheme('newspaper')">Thème Journal</button>
+                </div>
+            </div>
+            
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <button class="close-menu" id="close-menu">&times;</button>
+            <a href="index.html#accueil" class="nav-link">Accueil</a>
+            <a href="index.html#realisations" class="nav-link">Réalisations</a>
+            <a href="index.html#a-propos" class="nav-link">À propos de nous</a>
+            <a href="index.html#contact" class="nav-link">Contact</a>
+            <a href="presse.html" class="nav-link">Presse</a>
+        </div>
+    </header>
+
+    <main class="presse-page">
+        <div class="presse-header">
+            <a href="index.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span>Retour aux réalisations</span>
+            </a>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-wrapper" id="carousel-wrapper">
+                <!-- Article 1 -->
+                <div class="carousel-item active">
+                    <div class="carousel-img" data-img="images/presse-rives-sud.jpg" data-num="01"></div>
+                    <div class="carousel-content">
+                        <span>Le Progrès - Loire</span>
+                        <h2>Résidence Les Rives Sud</h2>
+                        <p>Vincent Buchet signe un programme de 18 logements intermédiaires labellisés NF Habitat.</p>
+                        <a href="#" class="carousel-cta">En savoir plus</a>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="carousel-item">
+                    <div class="carousel-img" data-img="images/presse-grand-chemin.jpg" data-num="02"></div>
+                    <div class="carousel-content">
+                        <span>L'Essor Affiche</span>
+                        <h2>Le Grand Chemin</h2>
+                        <p>Une architecture contemporaine qui redynamise le quartier sous le crayon de Vincent Buchet.</p>
+                        <a href="#" class="carousel-cta">En savoir plus</a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="carousel-item">
+                    <div class="carousel-img" data-img="images/presse-cote.jpg" data-num="03"></div>
+                    <div class="carousel-content">
+                        <span>Dossier de Presse</span>
+                        <h2>La Résidence de la Côte</h2>
+                        <p>Un ensemble de 32 appartements alliant modernité et confort.</p>
+                        <a href="#" class="carousel-cta">En savoir plus</a>
+                    </div>
+                </div>
+
+                <!-- Article 4 -->
+                <div class="carousel-item">
+                    <div class="carousel-img" data-img="images/presse-portrait.jpg" data-num="04"></div>
+                    <div class="carousel-content">
+                        <span>Architecture & Ville</span>
+                        <h2>Buchet Vincent : 24 ans d'expertise</h2>
+                        <p>Portrait d'un architecte DPLG ancré dans son territoire ligérien.</p>
+                        <a href="#" class="carousel-cta">En savoir plus</a>
+                    </div>
+                </div>
+
+                <!-- Article 5 -->
+                <div class="carousel-item">
+                    <div class="carousel-img" data-img="images/presse-nf-habitat.jpg" data-num="05"></div>
+                    <div class="carousel-content">
+                        <span>Habitat Durable</span>
+                        <h2>Le Label NF Habitat</h2>
+                        <p>Des performances énergétiques et acoustiques supérieures dans nos réalisations.</p>
+                        <a href="#" class="carousel-cta">En savoir plus</a>
+                    </div>
+                </div>
+
+                <!-- Article 6 -->
+                <div class="carousel-item">
+                    <div class="carousel-img" data-img="images/presse-06.jpg" data-num="06"></div>
+                    <div class="carousel-content">
+                        <span>Nouveau projet</span>
+                        <h2>Projet à venir</h2>
+                        <p>Description du nouveau projet. Remplacez cette image par la vôtre.</p>
+                        <a href="#" class="carousel-cta">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-nav">
+                <button class="carousel-btn" id="prev-btn" aria-label="Précédent">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="carousel-btn" id="next-btn" aria-label="Suivant">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+
+            <div class="carousel-indicators" id="carousel-indicators"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-text">© 2026 TOPFACADE. Tous droits réservés.</div>
+        <div class="footer-contact"><a href="mailto:contact@topfacade.fr">contact@topfacade.fr</a> &nbsp;|&nbsp; +33 1 23 45 67 89</div>
+        <div class="social-icons">
+            <a href="#" class="social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            <a href="#" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+        </div>
+    </footer>
+
+    <script>
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeDropdown = document.getElementById('theme-dropdown');
+
+        themeToggleBtn.addEventListener('click', (e) => { e.stopPropagation(); themeDropdown.classList.toggle('active'); });
+        document.addEventListener('click', (e) => { if (!themeToggleBtn.contains(e.target) && !themeDropdown.contains(e.target)) { themeDropdown.classList.remove('active'); } });
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            themeDropdown.classList.remove('active');
+        }
+
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        
+        mobileToggle.addEventListener('click', () => { mobileMenu.classList.add('active'); });
+        closeMenu.addEventListener('click', () => { mobileMenu.classList.remove('active'); });
+        document.querySelectorAll('.mobile-menu .nav-link').forEach(link => {
+            link.addEventListener('click', () => { mobileMenu.classList.remove('active'); });
+        });
+
+        const items = document.querySelectorAll('.carousel-item');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const carouselWrapper = document.getElementById('carousel-wrapper');
+        const indicatorsContainer = document.getElementById('carousel-indicators');
+        let currentIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        items.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-indicator' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => { currentIndex = i; updateCarousel(); });
+            indicatorsContainer.appendChild(dot);
+        });
+
+        function updateCarousel() {
+            items.forEach((item, index) => {
+                item.classList.remove('active', 'prev', 'next', 'hidden');
+                if (index === currentIndex) {
+                    item.classList.add('active');
+                } else if (index === (currentIndex - 1 + items.length) % items.length) {
+                    item.classList.add('prev');
+                } else if (index === (currentIndex + 1) % items.length) {
+                    item.classList.add('next');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+            document.querySelectorAll('.carousel-indicator').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        });
+
+        carouselWrapper.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselWrapper.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    currentIndex = (currentIndex + 1) % items.length;
+                } else {
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                }
+                updateCarousel();
+            }
+        }, { passive: true });
+
+        updateCarousel();
+    </script>
+
+    <script>
+        document.querySelectorAll('[data-img]').forEach(el => {
+            const imgSrc = el.getAttribute('data-img');
+            const imgNum = el.getAttribute('data-num');
+            if(window.getComputedStyle(el).position === 'static') { el.style.position = 'relative'; }
+            const numDiv = document.createElement('div');
+            numDiv.className = 'img-num';
+            numDiv.textContent = imgNum;
+            el.appendChild(numDiv);
+            const img = new Image();
+            img.src = imgSrc;
+            img.onload = () => { el.style.backgroundImage = `url('${img.src}')`; numDiv.style.display = 'none'; };
+        });
+    </script>
+</body>
+</html>
